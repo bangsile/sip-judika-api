@@ -1,0 +1,58 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int    @id @default(autoincrement())
+  nama     String
+  username String @unique
+  password String
+  role     String
+}
+
+model Dosen {
+  id       Int    @id @default(autoincrement())
+  nama     String
+  nidn     String @unique
+  password String
+  role     String @default("dosen")
+}
+
+model Mahasiswa {
+  id       Int    @id @default(autoincrement())
+  nama     String
+  npm      String @unique
+  password String
+  no_hp    String
+  role     String @default("mahasiswa")
+  // penelitian MahasiswaHasPenelitian[]
+}
+
+model Penelitian {
+  id              Int     @id @default(autoincrement())
+  judul           String
+  objek           String
+  latar_belakang  String
+  tujuan          String
+  pembimbing_satu String
+  pembimbing_dua  String
+  daftar_pustaka  String
+  status          String  @default("PENDING")
+  pesan           String?
+  npm             String
+  nama            String
+  // mahasiswa       MahasiswaHasPenelitian[]
+}
+
+// model MahasiswaHasPenelitian {
+//   id           Int        @id @default(autoincrement())
+//   mahasiswa    Mahasiswa  @relation(fields: [mahasiswaId], references: [id])
+//   mahasiswaId  Int
+//   penelitian   Penelitian @relation(fields: [penelitianId], references: [id])
+//   penelitianId Int
+// }
