@@ -92,8 +92,8 @@ export const updateDosen = async (req, res) => {
 			data: {
 				nama,
 				nidn,
-				password,
-				role,
+				// password,
+				// role,
 			},
 		});
 		res.status(200).json({ success: true, data: dosen });
